@@ -9,7 +9,7 @@ var y2;
 var z1;
 var z2;
 var CubeBlock;
-var Mode;
+var Mode = 0;
 // Modes:
 // 0 - wait for 1st block
 // 1 - wait for 2nd block
@@ -17,12 +17,36 @@ var Mode;
 
 function createHollowCuboid(x1,y1,z1,x2,y2,z2,CubeBlock)
 {
-  var lowestX = Math.min(x1, x2);
-	var lowestY = Math.min(y1, y2);
-	var lowestZ = Math.min(z1, z2);
-	var highestX = Math.max(x1, x2);
-	var highestY = Math.max(y1, y2);
-	var highestZ = Math.max(z1, z2);
+	var lowestX;
+	var lowestY;
+	var lowestZ;
+	var highestX;
+	var highestY;
+	var highestZ;
+	if(x1 < x2) {
+	lowestX = x1;
+	highestX = x2;}
+
+else{
+lowestX = x2;
+highestX = x1;
+}
+if(y1 < y2) {
+lowestY = y1;
+highestY = y2;}
+
+else{
+lowestY = y2;
+highestY = y1;
+}
+if(z1 < z2) {
+lowestZ = z1;
+highestZ = z2;}
+
+else{
+lowestZ = z2;
+highestZ = z1;
+}
 
 	for(var x = lowestX; x <= highestX; x++)
 	{
