@@ -83,7 +83,7 @@ function useItem(x,y,z,itemId,blockId)
 				x2 = x;
 				y2 = y;
 				z2 = z;
-				print("Position #2 saved at"+ x2 +", "+ y2 +", "+ z2 +".");
+				print("Position #2 saved at "+ x2 +", "+ y2 +", "+ z2 +".");
 				Mode = 2; // Time for block selection!
 			}
 		
@@ -92,7 +92,7 @@ function useItem(x,y,z,itemId,blockId)
 				x1 = x;
 				y1 = y;
 				z1 = z;
-				print("Position #1 saved at"+ x1 +", "+ y1 +", "+ z1 +".");
+				print("Position #1 saved at "+ x1 +", "+ y1 +", "+ z1 +".");
 				Mode = 1; // Time for second one!
 			}
 			
