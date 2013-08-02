@@ -73,6 +73,7 @@ function useItem(x,y,z,itemId,blockId)
 			}
 			
 			if(Mode == 3) {Mode = 0;}
+			preventDefault();
         }
         
 }
