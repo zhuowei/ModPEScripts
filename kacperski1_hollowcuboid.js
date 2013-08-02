@@ -75,10 +75,10 @@ function useItem(x,y,z,itemId,blockId)
 				CubeBlock = blockId;
 				print("Material selected - " + CubeBlock);
 				createHollowCuboid(x1,y1,z1,x2,y2,z2,CubeBlock);
-				Mode = 3;
+				Mode = 0;
 			}
 		
-			if(Mode == 1)
+			else if(Mode == 1)
 			{
 				x2 = x;
 				y2 = y;
@@ -87,7 +87,7 @@ function useItem(x,y,z,itemId,blockId)
 				Mode = 2; // Time for block selection!
 			}
 		
-			if(Mode == 0)
+			else if(Mode == 0)
 			{
 				x1 = x;
 				y1 = y;
@@ -96,7 +96,6 @@ function useItem(x,y,z,itemId,blockId)
 				Mode = 1; // Time for second one!
 			}
 			
-			if(Mode == 3) {Mode = 0;}
 			preventDefault();
         }
         
