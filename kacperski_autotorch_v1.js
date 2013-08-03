@@ -33,7 +33,7 @@ function useItem(x,y,z,itemId,blockId)
 
 function placeTorch(x,y,z)
 {
-	setTile(x,y,z,50);
+	setTile(x,y-1,z,50);
 	LastTorchX = x;
 	LastTorchY = y;
 	LastTorchZ = z;
