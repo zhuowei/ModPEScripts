@@ -17,6 +17,7 @@ function useItem(x,y,z,itemId,blockId)
 				}
 				else {break;}
 			}
+			preventDefault();
 		}
 	}
 }
