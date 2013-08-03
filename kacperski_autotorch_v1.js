@@ -9,7 +9,7 @@ var Temp;
 
 function useItem(x,y,z,itemId,blockId)
 {
-  if(itemId == 50 && blockId == 20)
+	if(itemId == 50 && blockId == 20)
 	{
 		if(Active == 0)
 		{
@@ -58,5 +58,6 @@ function bl_tickHook()
 			if(Temp < 0) {Temp = -Temp;}
 			if(Temp > 10) {placeTorch(getPlayerX(), getPlayerY(), getPlayerZ());}
 		}
+	}
 	}
 }
