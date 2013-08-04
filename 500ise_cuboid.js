@@ -32,13 +32,13 @@ function useItem(x, y, z, itemId, blockId) {
 }
 
 function createCuboid(firstPoint, secondPoint, material) {
-	var minX = Math.min(firstPoint[0], secondPoint[0]);
-	var minY = Math.min(firstPoint[1], secondPoint[1]);
-	var minZ = Math.min(firstPoint[2], secondPoint[2]);
+	var minX = _mathMin(firstPoint[0], secondPoint[0]);
+	var minY = _mathMin(firstPoint[1], secondPoint[1]);
+	var minZ = _mathMin(firstPoint[2], secondPoint[2]);
 
-	var maxX = Math.max(firstPoint[0], secondPoint[0]);
-	var maxY = Math.max(firstPoint[1], secondPoint[1]);
-	var maxZ = Math.max(firstPoint[2], secondPoint[2]);
+	var maxX = _mathMax(firstPoint[0], secondPoint[0]);
+	var maxY = _mathMax(firstPoint[1], secondPoint[1]);
+	var maxZ = _mathMax(firstPoint[2], secondPoint[2]);
 
 	for (var x = minX; x <= maxX; ++x) {
 		for (var z = minZ; z <= maxZ; ++z) {
@@ -49,3 +49,10 @@ function createCuboid(firstPoint, secondPoint, material) {
 	}
 }
 
+function _mathMin(first, second) {
+	return first < second? first : second;
+}
+
+function _mathMax(first, second) {
+	return first > second? first : second;
+}
