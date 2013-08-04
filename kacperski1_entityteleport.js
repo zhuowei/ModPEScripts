@@ -7,7 +7,7 @@ var TPset = 0;
 
 function useItem(x,y,z,itemId,blockId)
 {
-  if(itemId == 296) // Wheat
+  if(itemId == 268) // Wooden sword
 	{
 		TPx = x;
 		TPy = y + 1;
@@ -18,7 +18,7 @@ function useItem(x,y,z,itemId,blockId)
 }
 function attackHook(attacker, victim)
 {
-	if(getCarriedItem() == 296)
+	if(getCarriedItem() == 296) // Wheat
 	{
 		if(TPset == 1)
 		{
@@ -26,5 +26,6 @@ function attackHook(attacker, victim)
 			//clientMessage("Entity "+victim+" teleported to "+TPx+", "+TPy+", "+TPz+".");
 		}
 		else { clientMessage("Set destination coords first by hitting a block with wheat!"); }
+		preventDefault();
 	}
 }
