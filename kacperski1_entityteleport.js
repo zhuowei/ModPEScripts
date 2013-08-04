@@ -23,7 +23,7 @@ function attackHook(attacker, victim)
 		if(TPset == 1)
 		{
 			setPosition(victim,TPx,TPy,TPz);
-			clientMessage("Entity "+victim+" teleported to "+TPx+", "+TPy+", "+TPz+".");
+			//clientMessage("Entity "+victim+" teleported to "+TPx+", "+TPy+", "+TPz+".");
 		}
 		else { clientMessage("Set destination coords first by hitting a block with wheat!"); }
 	}
