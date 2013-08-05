@@ -7,7 +7,8 @@ var tickTimer = 0;
 var tickMax = 5; // After how many ticks
 var temp[3];
 var temp2[1];
-var redstoneState[256][256][256];
+var redstoneState[256][256][256] = 0;
+var FirstUseDone = 0;
 /*
 0 - Inactive
 1 to 14 - Active (level)
@@ -16,7 +17,7 @@ var redstoneState[256][256][256];
 
 function updateRedstone(x,y,z)
 {
-  
+	
 	if(getTile(x-1,y,z) == 49) {temp[0] = redstoneState[x-1][y][z];} // left
 	if(getTile(x+1,y,z) == 49) {temp[1] = redstoneState[x+1][y][z];} // right
 	if(getTile(x,y,z-1) == 49) {temp[2] = redstoneState[x][y][z-1];} // up
@@ -44,6 +45,21 @@ function placeRedstoneTorch(x,y,z)
 
 function useItem(x,y,z,itemId,blockId)
 {
+	if(FirstUseDone == 0)
+	{
+		for(var a = 0; a < 256; a++)
+		{
+			for(var b = 0; b < 256; b++)
+			{
+				for(var c = 0; c < 256; c++)
+				{
+					redstoneState[a][b][c] = 0;
+				}
+			}
+		}
+		FirstUseDone = 1;
+	}
+
 	if(itemId == 50) // Torch
 	{
 		placeRedstoneTorch(x,y,z);
