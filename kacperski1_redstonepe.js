@@ -5,9 +5,9 @@
 
 var tickTimer = 0;
 var tickMax = 5; // After how many ticks
-var temp[3];
-var temp2[1];
-var redstoneState[256][256][256] = 0;
+var temp = [];
+var temp2 = [];
+var redstoneState = [];
 var FirstUseDone = 0;
 /*
 0 - Inactive
@@ -45,7 +45,7 @@ function placeRedstoneTorch(x,y,z)
 
 function useItem(x,y,z,itemId,blockId)
 {
-	if(FirstUseDone == 0)
+	if(!FirstUseDone)
 	{
 		for(var a = 0; a < 256; a++)
 		{
