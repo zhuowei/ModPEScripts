@@ -3,6 +3,8 @@
 // PRE-ALPHA - NOTHING REALLY WORKS YET!
 // made by kacperski1 from BlackCode Studio
 
+var DEBUGMODE = 1;
+
 var tickTimer = 0;
 var tickMax = 5; // After how many ticks
 var temp = [];
@@ -17,7 +19,7 @@ var FirstUseDone = 0;
 
 function updateRedstone(x,y,z)
 {
-	
+	if(DEBUGMODE) print("debug: attempting to update redstone");
 	if(getTile(x-1,y,z) == 49) {temp[0] = redstoneState[x-1][y][z];} // left
 	if(getTile(x+1,y,z) == 49) {temp[1] = redstoneState[x+1][y][z];} // right
 	if(getTile(x,y,z-1) == 49) {temp[2] = redstoneState[x][y][z-1];} // up
@@ -29,6 +31,7 @@ function updateRedstone(x,y,z)
 	if(temp2[0] > temp2[1]) {redstoneState[x][y][z] = temp2[0] - 1;} else {redstoneState[x][y][z] = temp2[1] - 1;}
 	
 	if(redstoneState[x][y][z] > 0) {setTile(x,y,z,246);}
+	if(DEBUGMODE) print("debug: redstone updated correctly");
 }
 
 function placeRedstone(x,y,z)
@@ -54,6 +57,7 @@ function useItem(x,y,z,itemId,blockId)
 				for(var c = 0; c < 256; c++)
 				{
 					redstoneState[a][b][c] = 0;
+					if(DEBUGMODE) print("debug: FirstUseDone correctly");
 				}
 			}
 		}
@@ -62,12 +66,16 @@ function useItem(x,y,z,itemId,blockId)
 
 	if(itemId == 50) // Torch
 	{
+		if(DEBUGMODE) print("debug: attempting to place torch");
 		placeRedstoneTorch(x,y,z);
+		if(DEBUGMODE) print("debug: torch placed correctly");
 		preventDefault();
 	}
 	if(itemId == 348) // Glowstone Dust
 	{
+		if(DEBUGMODE) print("debug: attempting to place redstone");
 		placeRedstone(x,y,z);
+		if(DEBUGMODE) print("debug: redstone placed correctly");
 		preventDefault();
 	}
 }
