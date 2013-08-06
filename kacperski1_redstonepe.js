@@ -9,8 +9,8 @@ var tickTimer = 0;
 var tickMax = 5; // After how many ticks
 var temp = [];
 var temp2 = [];
-var redstoneState = [256,256,256];
-var FirstUseDone = 1;
+var redstoneState = [];
+var FirstUseDone = 0;
 /*
 0 - Inactive
 1 to 14 - Active (level)
@@ -56,7 +56,7 @@ function useItem(x,y,z,itemId,blockId)
 			{
 				for(var c = 0; c < 256; c++)
 				{
-					redstoneState[a][b][c] = 0;
+					redstoneState[a] = [b,c];
 					if(DEBUGMODE) print("debug: FirstUseDone correctly");
 				}
 			}
