@@ -39,7 +39,7 @@ function placeTorch(x,y,z)
 	LastTorchZ = z;
 }
 
-function bl_tickHook()
+function modTick()
 {
 
 	if(Active == 1)
