@@ -1,5 +1,6 @@
 var riddenAnimal = null;
 var ANIMAL_SPEED = 0.5;
+var ANIMAL_VERTICAL_SPEED = 0.5;
 function attackHook(player, entity) {
 	preventDefault();
 	rideAnimal(player, entity);
@@ -16,32 +17,27 @@ function useItem(x, y, z, itemId, blockId) {
 	}
 }
 
-function bl_tickHook() {
+function modTick() {
 	if (riddenAnimal == null) return;
+	var playerYaw = getYaw();
+	var playerPitch = getPitch();
+	setRot(riddenAnimal, playerYaw, 0);
 	//todo: check if player is still mounted so we don't overwrite memory for lolz
 	var itemInHand = getCarriedItem();
-	if (itemInHand == 16) { //coal ore
-		setVelY(riddenAnimal, 0.5);
-	} else if (itemInHand == 15) { //iron ore
-		//down
-		//do nothing, gravity will take care of it
-	} else {
-		setVelY(riddenAnimal, 0);
-	}
-	
-	if (itemInHand == 14) {//gold ore
-		setVelX(riddenAnimal, ANIMAL_SPEED);
-	} else if (itemInHand == 56) { //diamond ore
-		setVelX(riddenAnimal, -1 * ANIMAL_SPEED);
+	if (itemInHand == 14) { //coal ore
+		var velX = -1 * Math.sin(playerYaw / 180 * Math.PI) * ANIMAL_SPEED;
+		var velZ = Math.cos(playerYaw / 180 * Math.PI) * ANIMAL_SPEED;
+		var velY = Math.sin((playerPitch - 180) / 180 * Math.PI) * ANIMAL_VERTICAL_SPEED;
+		setVelX(riddenAnimal, velX);
+		setVelY(riddenAnimal, velY);
+		setVelZ(riddenAnimal, velZ);
 	} else {
 		setVelX(riddenAnimal, 0);
-	}
-
-	if (itemInHand == 21) {//lapis
-		setVelZ(riddenAnimal, ANIMAL_SPEED);
-	} else if (itemInHand == 73) {//redstone ore
-		setVelZ(riddenAnimal, -1 * ANIMAL_SPEED);
-	} else {
+		setVelY(riddenAnimal, 0);
 		setVelZ(riddenAnimal, 0);
 	}
+}
+
+function leaveGame() {
+	riddenAnimal = null; //BlockLauncher-specific hook, workaround for BlockLauncher not reloading scripts after entering world
 }
