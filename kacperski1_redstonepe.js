@@ -1,5 +1,5 @@
 // RedstonePE - iOS and Android Redstone Mod!
-// version 0.0.1
+// version 0.0.2
 // PRE-ALPHA - NOTHING REALLY WORKS YET!
 // made by kacperski1 from BlackCode Studio
 
@@ -9,8 +9,15 @@ var tickTimer = 0;
 var tickMax = 5; // After how many ticks
 var temp = [];
 var temp2 = [];
-var redstoneState = [];
-var FirstUseDone = 0;
+var redstoneState = new Array(256);
+for (var x = 0; x < redstoneState.length; x++) {
+        redstoneState[x] = new Array(256);
+        for (var y = 0; y < redstoneState[x].length; y++) {
+                redstoneState[x][y] = new Array(256);
+        }
+}
+
+//var FirstUseDone = 1;
 /*
 0 - Inactive
 1 to 14 - Active (level)
@@ -48,22 +55,6 @@ function placeRedstoneTorch(x,y,z)
 
 function useItem(x,y,z,itemId,blockId)
 {
-	if(!FirstUseDone)
-	{
-		for(var a = 0; a < 256; a++)
-		{
-			for(var b = 0; b < 256; b++)
-			{
-				for(var c = 0; c < 256; c++)
-				{
-					redstoneState[a] = [b,c];
-					if(DEBUGMODE) print("debug: FirstUseDone correctly");
-				}
-			}
-		}
-		FirstUseDone = 1;
-	}
-
 	if(itemId == 50) // Torch
 	{
 		if(DEBUGMODE) print("debug: attempting to place torch");
