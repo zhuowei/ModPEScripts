@@ -10,7 +10,7 @@ var tickMax = 5; // After how many ticks
 var temp = [];
 var temp2 = [];
 var redstoneState = [256,256,256];
-var FirstUseDone = 0;
+var FirstUseDone = 1;
 /*
 0 - Inactive
 1 to 14 - Active (level)
