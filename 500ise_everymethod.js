@@ -56,6 +56,12 @@ function useItem(x, y, z, itemId, blockId) {
 	}
 
 	setRot(player, 123, 45);
+
+	//0.3 methods
+	if (abs(getYaw() - 123) > 0.1 || abs(getPitch() - 45) > 0.1) {
+		print("Rotation fail");
+	}
+
 }
 
 function attackHook(player, entity) {
@@ -63,7 +69,7 @@ function attackHook(player, entity) {
 }
 
 function abs(number) {
-	//helper method since the iOS version doesn't have a Math object
+	//helper method to test methods
 	if (number >= 0) return number;
 	return -1 * number;
 }
