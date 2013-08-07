@@ -1,3 +1,5 @@
+//This is a ModPE script that will instantly grow a tree when the ground is tapped with an oak sapling.
+
 function useItem(x,y,z,itemId,blockId,side)
 {
   {
