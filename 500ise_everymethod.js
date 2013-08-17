@@ -1,4 +1,4 @@
-//This is a useless script that calls every ModPE api as of version 0.2.
+//This is a useless script that calls every ModPE api as of version 0.5.
 //it's mainly for use as a unit test script.
 
 var playerHeight = 1.6;
@@ -66,6 +66,30 @@ function useItem(x, y, z, itemId, blockId) {
 
 function attackHook(player, entity) {
 	rideAnimal(player, entity);
+}
+
+function procCmd(cmd) {
+	print(cmd);
+	//OOP methods tested here
+	//all the Level methods
+/*	print(Level);
+	Level.setNightMode(true);
+	Level.setTile(2,3,4,45);
+	var tileId = Level.getTile(2,3,4);
+	if (tileId != 45) {
+		print("Tile setting fail");
+	}
+	Level.explode(2,3,4,5);
+	Level.spawnChicken(128,128,128, "mob/chicken.png");
+	Level.spawnCow(128,128,128, "mob/cow.png");
+	var levelAddr = Level.getAddress();*/
+	//player
+	var px = Player.getX();
+	var py = Player.getY();
+	var pz = Player.getZ();
+	var pe = Player.getEntity();
+	var pc = Player.getCarriedItem();
+	Player.addItemInventory(45, 12);
 }
 
 function abs(number) {
