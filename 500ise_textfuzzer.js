@@ -9,7 +9,7 @@ function randomStuff() {
 		if (Math.random() < 0.3) {
 			mychar = "\u00a7";
 		} else if (Math.random() < 0.8) {
-			mychar = String.fromCharCode(Math.floor(Math.random() * 0x60) + 0x20);
+			mychar = String.fromCharCode(Math.floor(Math.random() * 0x100));
 		} else {
 			mychar = String.fromCharCode(Math.floor(Math.random() * 0x10000));
 		}
