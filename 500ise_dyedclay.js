@@ -4,14 +4,14 @@ This script is licensed under CC0: do whatever you want with it.
 var BLOCK_STAINED_CLAY = 159;
 var initialized = false;
 
-var colour = [0x80ffffff, 0x80ff8000, 0x80ff80ff, 0x804040ff, 0x80ffff00, 0x8000ff00, 0x80ff0080, 0x80404040,
-	      0x80c4c4c4, 0x800080c8, 0x80800080, 0x80000080, 0x80804000, 0x80008000, 0x80800000, 0x80000000];
+var colour = [0xffffff, 0xff8000, 0xff80ff, 0x4040ff, 0xffff00, 0x00ff00, 0xff0080, 0x404040,
+	      0xc4c4c4, 0x0080c8, 0x800080, 0x000080, 0x804000, 0x008000, 0x800000, 0x000000];
 
 
 function selectLevelHook() {
 	if (initialized) return;
-	//id 159 (same as desktop), name, texture, source material, opaque, render type
-	Block.defineBlock(BLOCK_STAINED_CLAY, "Stained Clay", [72], 1, true, 0);
+	//id 159 (same as desktop), name, texture, source material
+	Block.defineBlock(BLOCK_STAINED_CLAY, "Stained Clay", 72);
 	Block.setColor(BLOCK_STAINED_CLAY, colour);
 	Block.setDestroyTime(BLOCK_STAINED_CLAY, 1.25);
 	Block.setExplosionResistance(BLOCK_STAINED_CLAY, 7);
