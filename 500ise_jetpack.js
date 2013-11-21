@@ -1,4 +1,5 @@
 var playerDir = [0, 0, 0];
+var DEG_TO_RAD = Math.PI / 180;
 
 function modTick() {
 	if (getCarriedItem() == 280) {
