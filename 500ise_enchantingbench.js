@@ -15,7 +15,7 @@ function selectLevelHook() { //This is called before the first world is loaded
 		// in this case, the side textures are the same, and the top/bottom textures are different.
 		Block.defineBlock(ENCHANTMENT_TABLE_ID, "Enchantment table", [[2, 5], [10, 6], [11, 6], [11, 6], [11, 6], [11, 6]]);
 		// sets the block's boundaries.
-		// the order of parameters: xmax, xmin, zmax, zmin, ymax, ymin
+		// the order of parameters: xmin, ymin, zmin, xmax, ymax, zmax
 		// in this case, the block starts at y = 0, and stops at y = 0.75 - this is a block 3/4 m high.
 		Block.setShape(ENCHANTMENT_TABLE_ID, 0, 0, 0, 1, 3/4, 1);
 		Block.setDestroyTime(ENCHANTMENT_TABLE_ID, 1);
@@ -30,6 +30,12 @@ function useItem(x, y, z, itemId, blockId, side) {
 		currentWorkbenchZ = z;
 		setTile(x, y, z, 58); //set to workbench so Minecraft PE would open the crafting menu
 		needToSwitchBack = true;
+	}	
+}
+
+function procCmd(cmd) {
+	if (cmd == "enchanttable") {
+		addItemInventory(ENCHANTMENT_TABLE_ID, 1);
 	}
 }
 
