@@ -1,4 +1,5 @@
 var mySneak = false;
+var entityListenerActivated = false;
 function procCmd(cmd) {
 	if (cmd == "t") {
 		firstTest();
@@ -8,6 +9,8 @@ function procCmd(cmd) {
 		mySneak = !mySneak;
 		Entity.setSneaking(getPlayerEnt(), mySneak);
 		ModPE.setGameSpeed(mySneak? 40: 20);
+	} else if (cmd == "el") {
+		entityListenerActivated = !entityListenerActivated;
 	}
 }
 
@@ -77,4 +80,16 @@ function firstTest() {
 }
 
 function secondTest() {
+}
+
+function entityAddedHook(entity) {
+	if (entityListenerActivated) {
+		clientMessage("added entity " + Entity.getEntityTypeId(entity));
+	}
+}
+
+function entityRemovedHook(entity) {
+	if (entityListenerActivated) {
+		clientMessage("removed entity " + Entity.getEntityTypeId(entity));
+	}
 }
