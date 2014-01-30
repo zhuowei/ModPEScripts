@@ -77,6 +77,7 @@ function firstTest() {
 	var zombie2 = Level.spawnMob(getPlayerX(), getPlayerY(), getPlayerZ(), 32, "mob/char.png");
 	Entity.setRenderType(zombie2, 12);
 	Entity.setFireTicks(getPlayerEnt(), 1000);
+	ModPE.langEdit("options.group.realms", "Cloudify");
 }
 
 function secondTest() {
