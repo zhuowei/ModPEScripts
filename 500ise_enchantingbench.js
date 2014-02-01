@@ -13,7 +13,10 @@ function selectLevelHook() { //This is called before the first world is loaded
 		// define a block with ID 187, name "Enchantment table", and the following textures
 		// in the order (bottom, top, south, north, west, east).
 		// in this case, the side textures are the same, and the top/bottom textures are different.
-		Block.defineBlock(ENCHANTMENT_TABLE_ID, "Enchantment table", [[2, 5], [10, 6], [11, 6], [11, 6], [11, 6], [11, 6]]);
+		Block.defineBlock(ENCHANTMENT_TABLE_ID, "Enchantment table", 
+			[["enchanting_table_bottom", 0], ["enchanting_table_top", 0],
+			["enchanting_table_side", 0], ["enchanting_table_side", 0],
+			["enchanting_table_side", 0], ["enchanting_table_side", 0]]);
 		// sets the block's boundaries.
 		// the order of parameters: xmin, ymin, zmin, xmax, ymax, zmax
 		// in this case, the block starts at y = 0, and stops at y = 0.75 - this is a block 3/4 m high.
