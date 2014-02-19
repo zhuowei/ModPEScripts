@@ -1,5 +1,8 @@
 var mySneak = false;
 var entityListenerActivated = false;
+
+ModPE.addRecipe(256, 1, 0, [1, 1, 0]); //gives iron tools from stone ;)
+
 function procCmd(cmd) {
 	if (cmd == "t") {
 		firstTest();
@@ -93,4 +96,8 @@ function entityRemovedHook(entity) {
 	if (entityListenerActivated) {
 		clientMessage("removed entity " + Entity.getEntityTypeId(entity));
 	}
+}
+
+function startDestroyBlock(x, y, z, side) {
+	clientMessage("Start destroy block: " + x + ":" + y + ":" + z + ":" + side);
 }
