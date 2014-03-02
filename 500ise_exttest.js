@@ -1,7 +1,8 @@
 var mySneak = false;
 var entityListenerActivated = false;
 
-ModPE.addRecipe(256, 1, 0, [1, 1, 0]); //gives iron tools from stone ;)
+ModPE.addCraftRecipe(256, 1, 0, [1, 0]); //gives iron tools from stone ;)
+ModPE.addFurnaceRecipe(3, 257, 0); //gives iron pickaxe from dirt ;)
 
 function procCmd(cmd) {
 	if (cmd == "t") {
@@ -14,6 +15,9 @@ function procCmd(cmd) {
 		ModPE.setGameSpeed(mySneak? 40: 20);
 	} else if (cmd == "el") {
 		entityListenerActivated = !entityListenerActivated;
+	} else if (cmd == "cow") {
+		var cow = spawnCow(getPlayerX(), getPlayerY() + 1, getPlayerZ());
+		Entity.setNameTag(cow, "Sparkle");
 	}
 }
 
@@ -44,7 +48,7 @@ function useItem(x, y, z, itemId, blockId, side) {
 }
 
 function destroyBlock(x, y, z, side) {
-	print("Destroyed block at " + x + ":" + y + ":" + z);
+	ModPE.showTipMessage("Destroyed block at " + x + ":" + y + ":" + z);
 }
 
 function newLevel() {
@@ -80,6 +84,7 @@ function firstTest() {
 	var zombie2 = Level.spawnMob(getPlayerX(), getPlayerY(), getPlayerZ(), 32, "mob/char.png");
 	Entity.setRenderType(zombie2, 12);
 	Entity.setFireTicks(getPlayerEnt(), 1000);
+	Entity.setNameTag(zombie2, "Herobrine");
 	ModPE.langEdit("options.group.realms", "Cloudify");
 }
 
