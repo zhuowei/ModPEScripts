@@ -1,8 +1,8 @@
 var mySneak = false;
 var entityListenerActivated = false;
 
-ModPE.addCraftRecipe(256, 1, 0, [1, 0]); //gives iron tools from stone ;)
-ModPE.addFurnaceRecipe(3, 257, 0); //gives iron pickaxe from dirt ;)
+Item.addCraftRecipe(256, 1, 0, [1, 1, 0]); //gives iron tools from stone ;)
+Item.addFurnaceRecipe(3, 257, 0); //gives iron pickaxe from dirt ;)
 
 function procCmd(cmd) {
 	if (cmd == "t") {
@@ -18,6 +18,11 @@ function procCmd(cmd) {
 	} else if (cmd == "cow") {
 		var cow = spawnCow(getPlayerX(), getPlayerY() + 1, getPlayerZ());
 		Entity.setNameTag(cow, "Sparkle");
+		ModPE.setCamera(cow);
+	} else if (cmd == "chatmsg") {
+		for (var i = 0; i < 16; i++) {
+			ModPE.sendChat("Hi! I'm a clientside ModPE script, saying " + i);
+		}
 	}
 }
 
@@ -90,7 +95,7 @@ function firstTest() {
 
 function secondTest() {
 }
-
+var cameraEntity = -1;
 function entityAddedHook(entity) {
 	if (entityListenerActivated) {
 		clientMessage("added entity " + Entity.getEntityTypeId(entity));
