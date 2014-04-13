@@ -13,5 +13,12 @@ function addEndermanToRenderer(renderer) {
 	bipedLeftLeg.addBox(-1.0, 0.0, -1.0, 2, 30, 2, var2);
 }
 
-addEndermanToRenderer(Renderer.get(3)); //player
-addEndermanToRenderer(Renderer.get(16)); //multiplayer
+var endermanRenderer = Renderer.createHumanoidRenderer();
+
+addEndermanToRenderer(endermanRenderer);
+
+function procCmd(cmd) {
+	var cow = spawnCow(getPlayerX(), getPlayerY(), getPlayerZ(), "mob/char.png");
+	clientMessage(endermanRenderer.renderType);
+	Entity.setRenderType(cow, endermanRenderer.renderType);
+}
