@@ -20,7 +20,7 @@ Block.defineBlock(ENCHANTMENT_TABLE_ID, "Enchantment table",
 Block.setShape(ENCHANTMENT_TABLE_ID, 0, 0, 0, 1, 3/4, 1);
 Block.setDestroyTime(ENCHANTMENT_TABLE_ID, 1);
 
-ModPE.addCraftRecipe(ENCHANTMENT_TABLE_ID, 1, 0, [1,0]);/*[340, 0, 
+Item.addCraftRecipe(ENCHANTMENT_TABLE_ID, 1, 0, [1,0]);/*[340, 0, 
 	264, 0, 264, 0,
 	49, 0, 49, 0, 49, 0, 49, 0]); //crafting recipe: 1 book, 2 diamonds, 4 obsidian*/
 
