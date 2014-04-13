@@ -18,7 +18,7 @@ function procCmd(cmd) {
 	} else if (cmd == "cow") {
 		var cow = spawnCow(getPlayerX(), getPlayerY() + 1, getPlayerZ());
 		Entity.setNameTag(cow, "Sparkle");
-		ModPE.setCamera(cow);
+		clientMessage(Entity.getUniqueId(cow));
 	} else if (cmd == "chatmsg") {
 		for (var i = 0; i < 16; i++) {
 			ModPE.sendChat("Hi! I'm a clientside ModPE script, saying " + i);
@@ -110,4 +110,8 @@ function entityRemovedHook(entity) {
 
 function startDestroyBlock(x, y, z, side) {
 	clientMessage("Start destroy block: " + x + ":" + y + ":" + z + ":" + side);
+}
+
+function attackHook(attacker, victim) {
+	clientMessage(victim + ":" + Entity.getUniqueId(victim));
 }
