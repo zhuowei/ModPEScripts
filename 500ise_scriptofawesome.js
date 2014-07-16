@@ -13,5 +13,5 @@ function procCmd(cmd) {
 	if (!activated) return;
 	p = getPlayerEnt();
 	var retval = eval(cmd);
-	clientMessage(retval);
+	clientMessage(String(retval));
 }
