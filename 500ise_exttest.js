@@ -1,5 +1,7 @@
 var mySneak = false;
 var entityListenerActivated = false;
+var lastPointedEntity = -1;
+var lastPointedBlock = -1;
 
 Item.addCraftRecipe(256, 1, 0, [1, 1, 0]); //gives iron tools from stone ;)
 Item.addFurnaceRecipe(3, 257, 0); //gives iron pickaxe from dirt ;)
@@ -23,6 +25,12 @@ function procCmd(cmd) {
 		for (var i = 0; i < 16; i++) {
 			ModPE.sendChat("Hi! I'm a clientside ModPE script, saying " + i);
 		}
+	} else if (cmd == "removeent") {
+		var allEnt = Entity.getAll();
+		for (var i = 0; i < allEnt.length; i++) {
+			Entity.remove(allEnt[i]);
+		}
+		clientMessage("Removed " + allEnt.length + " entities");
 	}
 }
 
@@ -91,6 +99,10 @@ function firstTest() {
 	Entity.setFireTicks(getPlayerEnt(), 1000);
 	Entity.setNameTag(zombie2, "Herobrine");
 	ModPE.langEdit("options.group.realms", "Cloudify");
+	Level.setTime(1234);
+	if (Level.getTime() != 1234) {
+		print("Level.getTime fail: " + Level.getTime());
+	}
 }
 
 function secondTest() {
@@ -114,4 +126,18 @@ function startDestroyBlock(x, y, z, side) {
 
 function attackHook(attacker, victim) {
 	clientMessage(victim + ":" + Entity.getUniqueId(victim));
+}
+
+function modTick() {
+	var pointedEntity = Player.getPointedEntity();
+	if (pointedEntity != lastPointedEntity) {
+		lastPointedEntity = pointedEntity;
+		clientMessage("New pointed entity: " + pointedEntity + (pointedEntity != -1?
+			" type: " + Entity.getEntityTypeId(pointedEntity) : " no entity"));
+	}
+	var pointedBlock = Player.getPointedBlockId();
+	if (pointedBlock != lastPointedBlock) {
+		lastPointedBlock = pointedBlock;
+		if (pointedBlock != -1) clientMessage("New pointed block: " + pointedBlock);
+	}
 }
