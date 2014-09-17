@@ -23,7 +23,7 @@ function selectLevelHook() {
 }
 
 function defineBlockAgain() {
-	Block.defineBlock(187, "Test", 4, 1, true, type[ptr]);
+	Block.defineBlock(187, "Test", [["flower1", 0]], 1, false, type[ptr]);
 }
 
 function useItem(x, y, z, itemId, blockId) {
@@ -32,5 +32,12 @@ function useItem(x, y, z, itemId, blockId) {
 	ptr = (ptr + 1) % type.length;
 	setTile(x, y, z, 0);
 	setTile(x, y, z, 187);
+}
+
+function procCmd(cmd) {
+	if (cmd != "renders") return;
+	for (var i = 0; i < 0x100; i++) {
+		print(i + ":" + Block.getRenderType(i));
+	}
 }
 	

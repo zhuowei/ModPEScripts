@@ -7,6 +7,7 @@ Item.addCraftRecipe(256, 1, 0, [1, 1, 0]); //gives iron tools from stone ;)
 Item.addFurnaceRecipe(3, 257, 0); //gives iron pickaxe from dirt ;)
 
 function procCmd(cmd) {
+	var parts = cmd.split(" ");
 	if (cmd == "t") {
 		firstTest();
 	} else if (cmd == "l") {
@@ -31,6 +32,8 @@ function procCmd(cmd) {
 			Entity.remove(allEnt[i]);
 		}
 		clientMessage("Removed " + allEnt.length + " entities");
+	} else if (parts[0] == "render") {
+		Entity.setRenderType(getPlayerEnt(), parts[1]);
 	}
 }
 
