@@ -2,7 +2,7 @@
 //uses block ID 187
 //use give commands to give yourself block 187; when tapped, it opens the crafting menu
 //this script is licensed under CC0: you may do whatever you want with it.
-var ENCHANTMENT_TABLE_ID = 187;
+var ENCHANTMENT_TABLE_ID = 240;
 
 var currentWorkbenchX, currentWorkbenchY, currentWorkbenchZ;
 var needToSwitchBack = false;
