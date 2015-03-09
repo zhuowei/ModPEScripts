@@ -4,7 +4,7 @@ Item.defineArmor(411, "empty_armor_slot_boots", 0, "Zombie mask",
 			"mob/zombie.png", 1, 10, ArmorType.helmet);
 Item.defineArmor(412, "empty_armor_slot_chestplate", 0, "Zombie shirt",
 			"mob/zombie.png", 1, 10, ArmorType.chestplate);
-// usually for chestplate, you'll have a separate texture (e.g. built-in armour has a _2.png for chestplate)
+// usually for leggings, you'll have a separate texture (e.g. built-in armour has a _2.png for leggings)
 Item.defineArmor(413, "empty_armor_slot_leggings", 0, "Zombie pants",
 			"mob/zombie.png", 1, 10, ArmorType.leggings);
 Item.defineArmor(414, "empty_armor_slot_boots", 0, "Zombie shoes",
