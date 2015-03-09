@@ -1,0 +1,1 @@
+ModPE.crash();
