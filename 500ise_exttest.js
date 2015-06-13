@@ -29,11 +29,20 @@ function procCmd(cmd) {
 	} else if (cmd == "removeent") {
 		var allEnt = Entity.getAll();
 		for (var i = 0; i < allEnt.length; i++) {
+			if (allEnt[i] == getPlayerEnt()) continue;
 			Entity.remove(allEnt[i]);
 		}
 		clientMessage("Removed " + allEnt.length + " entities");
 	} else if (parts[0] == "render") {
 		Entity.setRenderType(getPlayerEnt(), parts[1]);
+	} else if (parts[0] == "drop") {
+		var drop = Level.dropItem(getPlayerX(), getPlayerY(), getPlayerZ() + 5, 0.0, 46, 12, 17);
+		var dropId = Entity.getItemEntityId(drop);
+		var dropData = Entity.getItemEntityData(drop);
+		var dropCount = Entity.getItemEntityCount(drop);
+		if (dropId != 46 || dropCount != 12 || dropData != 17) {
+			clientMessage("Drop fail: expected 46 12 17 got " + dropId + ":" + dropCount + ":" + dropData);
+		}
 	}
 }
 
