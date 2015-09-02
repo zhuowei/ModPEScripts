@@ -90,7 +90,7 @@ function firstTest() {
 	if (Entity.getEntityTypeId(zombie) != 32) {
 		print("Entity type id fail");
 	}
-	if (Entity.getHealth(zombie) != 12) {
+	if (Entity.getHealth(zombie) != 20) {
 		print("Zombie health fail: " + Entity.getHealth(zombie));
 	}
 	Entity.remove(zombie);
@@ -110,10 +110,33 @@ function firstTest() {
 	Entity.setRenderType(zombie2, 12);
 	Entity.setFireTicks(getPlayerEnt(), 1000);
 	Entity.setNameTag(zombie2, "Herobrine");
+	if (Entity.getNameTag(zombie2) != "Herobrine") {
+		print("Name tag fail");
+	}
 	ModPE.langEdit("options.group.realms", "Cloudify");
 	Level.setTime(1234);
 	if (Level.getTime() != 1234) {
 		print("Level.getTime fail: " + Level.getTime());
+	}
+	Entity.setSneaking(getPlayerEnt(), true);
+	if (Entity.isSneaking(getPlayerEnt()) != true) {
+		print("Entity sneaking fail");
+	}
+	Entity.setSneaking(getPlayerEnt(), false);
+	var gameMode = Level.getGameMode();
+	var newMode = gameMode == 1? 0: 1;
+	Level.setGameMode(newMode);
+	if (newMode != Level.getGameMode()) {
+		print("Gamemode fail");
+	}
+	Level.setGameMode(gameMode);
+
+	var drop = Level.dropItem(getPlayerX(), getPlayerY(), getPlayerZ() + 5, 0.0, 46, 12, 17);
+	var dropId = Entity.getItemEntityId(drop);
+	var dropData = Entity.getItemEntityData(drop);
+	var dropCount = Entity.getItemEntityCount(drop);
+	if (dropId != 46 || dropCount != 12 || dropData != 17) {
+		clientMessage("Drop fail: expected 46 12 17 got " + dropId + ":" + dropCount + ":" + dropData);
 	}
 }
 
