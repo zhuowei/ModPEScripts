@@ -142,6 +142,7 @@ function redstoneUpdateHook(x, y, z, newCurrent, worldLoading, blockId, blockDam
 		}
 		// clear extended bit in data value
 		setTile(x, y, z, blockId, blockDamage & 0x7);
+		Level.playSound(x, y, z, "random.eat", 1, 0.5); // piston retract sound
 	} else if (!currentlyExtended && active) {
 		// extend
 		var dir = directions[side];
@@ -172,6 +173,7 @@ function redstoneUpdateHook(x, y, z, newCurrent, worldLoading, blockId, blockDam
 			}
 			// set extended bit in data value
 			setTile(x, y, z, blockId, blockDamage | 0x8);
+			Level.playSound(x, y, z, "random.eat", 1, 1.5); // piston extend sound
 		}
 	}
 }
