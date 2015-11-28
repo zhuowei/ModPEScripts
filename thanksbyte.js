@@ -12,5 +12,5 @@ Block.defineBlock(REDSTONE_DUST_ID, "Redstone dust",
 // in this case, the block starts at y = 0, and stops at y = 0.0625 -- 6.25 cm high.
 Block.setShape(REDSTONE_DUST_ID, 0, 0, 0, 1, 0.0625, 1);
 Block.setRenderLayer(REDSTONE_DUST_ID, 1); // render on layer 1; i.e. transparent
-Block.setColor(REDSTONE_DUST_ID, [0x800000]);
+Block.setColor(REDSTONE_DUST_ID, [0xff0000]);
 Block.setLightOpacity(REDSTONE_DUST_ID, 0);
