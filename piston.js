@@ -26,7 +26,7 @@ function pistonTex(activeFace, otherFace, insideFace) {
 		var dat = (i / 6)|0;
 		var face = (i % 6);
 		var facingFace = (dat & 0x8)? insideFace: activeFace;
-		if (dat == 6 || dat == 7)
+		if (dat == 6 || dat == 7 || dat == 14)
 			outarr[i] = activeFace; // this is the extended piston
 		else
 			outarr[i] = face == (dat & 0x7)? facingFace: otherFace;
@@ -55,7 +55,15 @@ Block.setRedstoneConsumer(pistonId, true);
 // the sticky piston block.
 Block.defineBlock(stickyPistonId,"Crap sticky piston",
 	pistonTex(["piston_top_sticky",0],["furnace",3],["piston_inner",0]),
-	1,false);
+	1 /* stone */,false /* not opaque */);
+
+Block.setRenderLayer(stickyPistonId, 4); // render with transparency (same layer as plants)
+Block.setLightOpacity(stickyPistonId, 0); // let light pass through
+// shape for sticky piston head
+Block.setShape(stickyPistonId, 0.325, 0, 0.325, 0.75, 1, 0.75, 6); // piston extended y
+Block.setShape(stickyPistonId, 0.325, 0.325, 0, 0.75, 0.75, 1, 7); // piston extended z
+Block.setShape(stickyPistonId, 0, 0.325, 0.325, 1, 0.75, 0.75, 6 | 0x8); // piston extended x
+// allow the sticky piston block to respond to changes in redstone current
 Block.setRedstoneConsumer(stickyPistonId, true);
 
 // add piston to creative inventory
@@ -160,7 +168,7 @@ function redstoneUpdateHook(x, y, z, newCurrent, worldLoading, blockId, blockDam
 				var bId, bData;
 				if (i == 0) { // head
 					// the block to push forward is the piston head
-					bId = pistonId;
+					bId = blockId;
 					bData = headData;
 				} else {
 					// read data from the block's current position
