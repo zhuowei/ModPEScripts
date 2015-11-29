@@ -31,6 +31,21 @@ Player.addItemCreativeInv(4013, 1, 0);
 Item.setCategory(4014, ItemCategory.FOOD);
 Player.addItemCreativeInv(4014, 1, 0);
 
+var shoesNutrition = 4;
+
+// make the shoes edible
+// anything that can be specified in items.json can be specified here
+Item.setProperties(4014, {
+    "use_animation": "eat",
+    "use_duration": 32,
+
+    "food": {
+      "nutrition": shoesNutrition,
+      "saturation_modifier": "low",
+      "is_meat": false
+    }
+});
+
 function procCmd(cmd) {
 	var parts = cmd.split(" ");
 	if (cmd == "t") {
@@ -47,6 +62,7 @@ function procCmd(cmd) {
 		var cow = spawnCow(getPlayerX(), getPlayerY() + 1, getPlayerZ());
 		Entity.setNameTag(cow, "Sparkle");
 		clientMessage(Entity.getUniqueId(cow));
+		ModPE.setCamera(cow);
 	} else if (cmd == "chatmsg") {
 		for (var i = 0; i < 16; i++) {
 			ModPE.sendChat("Hi! I'm a clientside ModPE script, saying " + i);
