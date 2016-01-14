@@ -14,6 +14,9 @@ ModPE.setFoodItem(4003, "record_cat", 0, 5, "Swagger extension");
 Item.addFurnaceRecipe(1, 76, 0); //gives redstone torch from dirt
 Item.addFurnaceRecipe(4003, 2, 0); // gives grass from swagger extension
 
+Item.addCraftRecipe(4003, 1, 0, [1, 1, 0]); // swagger extension from stone
+Item.addCraftRecipe(1, 1, 0, [4003, 1, 0]); // stone from swagger extension
+
 Item.defineArmor(4011, "empty_armor_slot_boots", 0, "Zombie mask",
 			"mob/zombie.png", 1, 10, ArmorType.helmet);
 Item.defineArmor(4012, "empty_armor_slot_chestplate", 0, "Zombie shirt",
@@ -30,6 +33,11 @@ Item.setCategory(4013, ItemCategory.TOOL);
 Player.addItemCreativeInv(4013, 1, 0);
 Item.setCategory(4014, ItemCategory.FOOD);
 Player.addItemCreativeInv(4014, 1, 0);
+
+var liquidId = 191;
+var liquidIdStill = Block.defineLiquidBlock(liquidId /* 192 will also be used for still version */,
+	"Mudslide", [["stone", 0], ["sand", 0]],
+	10 /* material: lava */);
 
 var shoesNutrition = 4;
 
@@ -86,7 +94,7 @@ function procCmd(cmd) {
 		}
 	} else if (parts[0] == "prep") {
 		addItemInventory(1, 64);
-		addItemInventory(pistonId, 64);
+		//addItemInventory(pistonId, 64);
 		addItemInventory(3, 64);
 		addItemInventory(263, 64); // coal
 		addItemInventory(4011, 1);
@@ -100,6 +108,8 @@ function procCmd(cmd) {
 		Entity.setMaxHealth(cowfly, 9999);
 		Entity.setHealth(cowfly, 9999);
 		Entity.setNameTag(cowfly, "Cowfly");
+	} else if (parts[0] == "en") {
+		enchantTest();
 	}
 }
 
@@ -228,6 +238,33 @@ function firstTest() {
 	}
 }
 
+function enchantTest() {
+	var currentSlotId = Player.getSelectedSlotId();
+	Player.setInventorySlot(currentSlotId, 256, 1, 0);
+	if (Player.getInventorySlot(currentSlotId) != 256) {
+		print("Inventory slot " + currentSlotId + " fail: " + Player.getInventorySlot(1));
+	}
+	Player.enchant(currentSlotId, Enchantment.EFFICIENCY, 1);
+	var enchants = Player.getEnchantments(currentSlotId);
+	if (enchants == null) {
+		print("enchants fail: returned null");
+	} else {
+		if (enchants.length != 1) {
+			print("enchants length fail: " + enchants.length);
+		}
+		for (var i = 0; i < enchants.length; i++) {
+			if (enchants[i].type != Enchantment.FIRE_ASPECT || enchants[i].level != 1) {
+				print("enchant fail: " + enchants[i]);
+			}
+		}
+	}
+	Player.setItemCustomName(currentSlotId, "Kindle Fire");
+	var customName = Player.getItemCustomName(currentSlotId);
+	if (customName != "Kindle Fire") {
+		print("custom name fail: " + customName);
+	}
+}
+
 function secondTest() {
 }
 var cameraEntity = -1;
@@ -278,4 +315,12 @@ function modTick() {
 
 function eatHook(h, saturationRatio) {
 	clientMessage("eat health: " + h + ":" + saturationRatio);
+}
+
+function projectileHitEntityHook(projectile, target) {
+	clientMessage("Projectile hit entity: " + projectile + ":" + target);
+}
+
+function projectileHitBlockHook(projectile, x, y, z, side) {
+	clientMessage("Projectile hit block: " + x + ":" + y + ":" + z + " side " + side);
 }
