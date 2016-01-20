@@ -10,6 +10,8 @@ Item.addCraftRecipe(258, 1, 0, [256, 1, 0]); //gives iron tools from stone ;)
 Item.addFurnaceRecipe(3, 257, 0); //gives iron pickaxe from dirt ;)
 Item.addShapedRecipe(257, 1, 0, [" r ", " s ", "   ",], ["r", 256, 0, "s", 3, 0]);
 
+Item.addCraftRecipe(35, 1, 2, [1, 1, 0]); //gives wool from stone
+
 ModPE.setFoodItem(4003, "record_cat", 0, 5, "Swagger extension");
 Item.addFurnaceRecipe(1, 76, 0); //gives redstone torch from dirt
 Item.addFurnaceRecipe(4003, 2, 0); // gives grass from swagger extension
@@ -38,6 +40,16 @@ var liquidId = 191;
 var liquidIdStill = Block.defineLiquidBlock(liquidId /* 192 will also be used for still version */,
 	"Mudslide", [["stone", 0], ["sand", 0]],
 	10 /* material: lava */);
+var blockThingId = 193;
+Block.defineBlock(193, "Swagstone", [
+["stone", 0],["stone", 0],["stone", 0],["stone", 0],["stone", 0],["stone", 0],
+["dirt", 0],["dirt", 0],["dirt", 0],["dirt", 0],["dirt", 0],["dirt", 0]
+], 1);
+
+//Item.addCraftRecipe(blockThingId, 1, 0, [5, 1, 0]); //gives SwagStone from 5:0
+//Item.addCraftRecipe(blockThingId, 1, 1, [5, 1, 4]); //gives SwagStone dirt from 5:4
+Item.addCraftRecipe(135, 1, 0, [24, 1, 0]);
+Item.addCraftRecipe(136, 1, 0, [24, 1, 1]);
 
 var shoesNutrition = 4;
 
@@ -187,7 +199,7 @@ function firstTest() {
 		print("Carried item fail: slot " + currentSlotId + ":" + getCarriedItem() + ":" + Player.getInventorySlot(currentSlotId));
 	}
 	var zombie2 = Level.spawnMob(getPlayerX(), getPlayerY(), getPlayerZ(), 32, "mob/char.png");
-	Entity.setRenderType(zombie2, 12);
+	Entity.setRenderType(zombie2, EntityRenderType.human);
 	Entity.setFireTicks(getPlayerEnt(), 1000);
 	Entity.setNameTag(zombie2, "Herobrine");
 	if (Entity.getNameTag(zombie2) != "Herobrine") {
@@ -236,6 +248,7 @@ function firstTest() {
 	if (Entity.getHealth(superCow) != 5000) {
 		print("Cow fail: " + Entity.getHealth(superCow));
 	}
+	Player.clearInventorySlot(currentSlotId);
 }
 
 function enchantTest() {
@@ -311,6 +324,7 @@ function modTick() {
 		Entity.setVelY(cowfly, 0);
 		Entity.setVelZ(cowfly, 0);
 	}
+	//Item.setRecipeIgnoreData(5, true);
 }
 
 function eatHook(h, saturationRatio) {
