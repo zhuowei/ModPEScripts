@@ -11,6 +11,7 @@ function addEndermanToRenderer(renderer) {
 	bipedRightLeg.addBox(-1.0, 0.0, -1.0, 2, 30, 2, var2);
 	var bipedLeftLeg = model.getPart("leftLeg").clear().setTextureOffset(56, 0);
 	bipedLeftLeg.addBox(-1.0, 0.0, -1.0, 2, 30, 2, var2);
+	renderer.name = "zhuowei.en.Enderman";
 }
 
 var endermanRenderer = Renderer.createHumanoidRenderer();
