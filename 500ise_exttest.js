@@ -126,6 +126,7 @@ function procCmd(cmd) {
 }
 
 function useItem(x, y, z, itemId, blockId, side) {
+	clientMessage("tapped block " + blockId + ":" + Level.getData(x, y, z));
 	if (blockId == 63 || blockId == 68) {//sign
 		for (var i = 0; i < 4; i++) {
 			clientMessage(Level.getSignText(x, y, z, i));
@@ -143,11 +144,13 @@ function useItem(x, y, z, itemId, blockId, side) {
 			var myInitItem = Level.getChestSlot(x, y, z, i);
 			// x, y, z, slot, id, damage, count
 			Level.setChestSlot(x, y, z, i, 35, i & 0xf, i);
+			Level.setChestSlotCustomName(x, y, z, i, "Wool of " + i + "ness");
 			var finalId = Level.getChestSlot(x, y, z, i);
 			var finalCount = Level.getChestSlotCount(x, y, z, i);
 			var finalData = Level.getChestSlotData(x, y, z, i);
-			if (finalId != 35 || finalCount != i || finalData != i % 16) {
-				print("Chest fail: " + finalId + ":" + finalCount + ":" + finalData);
+			var finalName = Level.getChestSlotCustomName(x, y, z, i);
+			if (finalId != 35 || finalCount != i || finalData != i % 16 || finalName != "Wool of " + i + "ness") {
+				print("Chest fail: " + finalId + ":" + finalCount + ":" + finalData + ":" + finalName);
 			}
 		}
 	} else if (blockId == 50) {
@@ -222,6 +225,7 @@ function firstTest() {
 		print("Gamemode fail");
 	}
 	Level.setGameMode(gameMode);
+
 	var player = getPlayerEnt();
 	var playerX = getPlayerX();
 	var playerY = getPlayerY();
@@ -240,6 +244,7 @@ function firstTest() {
 	Entity.addEffect(player, MobEffect.nightVision, 20*30, 0, false, true);
 	Entity.removeEffect(player, MobEffect.nightVision);
 	Entity.removeAllEffects(player);
+
 	setTile(playerX, playerY, playerZ, 76);
 	var superCow = spawnCow(playerX, playerY, playerZ);
 	Entity.setNameTag(superCow, "super cow");
@@ -248,6 +253,7 @@ function firstTest() {
 	if (Entity.getHealth(superCow) != 5000) {
 		print("Cow fail: " + Entity.getHealth(superCow));
 	}
+
 	Player.clearInventorySlot(currentSlotId);
 }
 
@@ -305,6 +311,10 @@ function attackHook(attacker, victim) {
 	}
 }
 
+function entityHurtHook(attacker, victim, hearts) {
+	clientMessage(attacker + " hurt " + victim + " with " + hearts);
+}
+
 function modTick() {
 	var pointedEntity = Player.getPointedEntity();
 	if (pointedEntity != lastPointedEntity) {
@@ -337,4 +347,8 @@ function projectileHitEntityHook(projectile, target) {
 
 function projectileHitBlockHook(projectile, x, y, z, side) {
 	clientMessage("Projectile hit block: " + x + ":" + y + ":" + z + " side " + side);
+}
+
+function deathHook(attacker, victim) {
+	clientMessage(victim + "(" + Entity.getEntityTypeId(victim) + ") died by " + attacker);
 }
