@@ -47,7 +47,7 @@ function clientLoop(clientSocket) {
 	var bw = new java.io.BufferedWrier(osw):
 	while (!clientSocket.isClosed()) {
 		var cmd = String(br.readLine()).trim();
-		if(cmd != null || cmd != "") {
+		if(cmd != null && cmd != "") {
 			try {
 				var response = String(eval(cmd)).trim();
 			} catch(e) {
