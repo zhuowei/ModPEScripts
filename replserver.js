@@ -1,3 +1,25 @@
+/**
+ * 
+ * Replserver.js
+ * 
+ * TCP server for debugging/running ModPE commands or just JavaScript in general.
+ * This best works with telnet.
+ * 
+ * You can use an application like JuiceSSH, which supports telnet.
+ * 
+ * Remember multi line isn't supported.
+ * 
+ * if(true) {
+ * doSomethingAwesome();
+ * andSomethingElseAwesome();
+ * }
+ * 
+ * would have to be condensed into one line like...
+ * 
+ * if(true) { doSomethingAwesome(); andSomethingElseAwesome(); }
+ * 
+ */
+
 (function() {
 var serverSocket, mainThread;
 function startServer() {
