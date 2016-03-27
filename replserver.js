@@ -30,7 +30,8 @@ function handleClientSocket(clientSocket) {
 			try {
 				clientLoop(clientSocket);
 			} catch (e) {
-				print(e);
+				//print(e);
+				//Prevent broken pipe exception when disconnecting (I think?)
 			}
 		}
 	}));
@@ -40,13 +41,22 @@ function handleClientSocket(clientSocket) {
 function clientLoop(clientSocket) {
 	var is = clientSocket.getInputStream();
 	var os = clientSocket.getOutputStream();
-	var dis = new java.io.DataInputStream(is);
-	var dos = new java.io.DataOutputStream(os);
+	var isr = new java.io.InputStreamReader(is);
+	var osw = new java.io.OutputStreamWriter(os);
+	var br = new java.io.BufferedReader(isr);
+	var bw = new java.io.BufferedWrier(osw):
 	while (!clientSocket.isClosed()) {
-		var cmd = String(dis.readUTF());
-		var response = String(eval(cmd));
-		print(cmd + ":" + response);
-		dos.writeUTF(response);
+		var cmd = String(br.readLine()).trim();
+		if(cmd != null || cmd != "") {
+			try {
+				var response = String(eval(cmd)).trim();
+			} catch(e) {
+				var response = e;
+			}
+			android.widget.Toast.makeText(com.mojang.minecraftpe.MainActivity.currentMainActivity.get(), cmd + " | " + response, 1).show();
+			bw.write(response);
+			bw.flush();
+		}
 	}
 }
 
