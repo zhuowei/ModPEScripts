@@ -66,6 +66,8 @@ Item.setProperties(4014, {
     }
 });
 
+Item.defineThrowable(4015, "apple", 0, "Throwable test", 64 /* stackable */);
+
 function procCmd(cmd) {
 	var parts = cmd.split(" ");
 	if (cmd == "t") {
@@ -122,6 +124,9 @@ function procCmd(cmd) {
 		Entity.setNameTag(cowfly, "Cowfly");
 	} else if (parts[0] == "en") {
 		enchantTest();
+	} else if (parts[0] == "skel") {
+		var mySkel = Level.spawnMob(getPlayerX(), getPlayerY(), getPlayerZ(), EntityType.SKELETON, "mob/charizard.png");
+		Entity.setNameTag(mySkel, "charm");
 	}
 }
 
@@ -164,6 +169,8 @@ function useItem(x, y, z, itemId, blockId, side) {
 		}
 	} else if (blockId == 52) {
 		Level.setSpawnerEntityType(x, y, z, EntityType.GHAST);
+	} else if (itemId == 4014) {
+		addItemInventory(4014, -1, 0); // remove one from inventory
 	}
 }
 
@@ -351,4 +358,20 @@ function projectileHitBlockHook(projectile, x, y, z, side) {
 
 function deathHook(attacker, victim) {
 	clientMessage(victim + "(" + Entity.getEntityTypeId(victim) + ") died by " + attacker);
+}
+
+function playerAddExperienceHook(player, experience) {
+	clientMessage("Player " + player + " gained " + experience + " xp");
+}
+
+function playerExpLevelChangeHook(player, levels) {
+	clientMessage("Player " + player + " gained " + levels + " levels");
+}
+
+function customThrowableHitEntityHook(projectile, itemId, target) {
+	clientMessage("custom throwable id " + itemId + " hit entity " + target);
+}
+
+function customThrowableHitBlockHook(projectile, itemId, x, y, z, side) {
+	clientMessage("custom throwable " + itemId + " hit block: " + x + ":" + y + ":" + z + " side " + side);
 }
