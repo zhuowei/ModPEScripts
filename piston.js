@@ -1,7 +1,7 @@
 "use strict"; // catch more errors
 
-var pistonId = 199;
-var stickyPistonId = 200;
+var pistonId = 200; // change id for 0.14
+var stickyPistonId = 201; // change id for 0.14
 
 // Maximum number of blocks a piston can push.
 var pistonMaxPush = 12;
