@@ -1,7 +1,7 @@
-//Super pickaxe: tap on a block with a diamond pickaxe to mine a 11x11x11 square around/above it
+//Super pickaxe: tap on a block with a Iron hoe to mine a 11x11x11 square around/above it
 
 function useItem(x, y, z, itemId, blockId) {
-	if (itemId != 278) return; //if not diamond pickaxe exit the method
+	if (itemId != 278) return; //if not iron hoe exit the method
 	for (var xx = x - 5; xx <= x + 5; xx++) {
 		for (var zz = z - 5; zz <= z + 5; zz++) {
 			for (var yy = y; yy < y + 11; yy++) {
