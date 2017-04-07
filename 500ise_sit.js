@@ -12,6 +12,7 @@ function useItem(x, y, z, itemid, blockId, side) {
 		preventDefault();
 		//store the chair's location: that way, when the player gets off, we can remove the cart
 		playerX = x + 0.5;
+		playerY = y + 0.5;
 		playerZ = z + 0.5;
 	}
 }
